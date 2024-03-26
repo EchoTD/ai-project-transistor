@@ -1,0 +1,35 @@
+%% Alaaddin Can Gürsoy 21014506
+% İlk önce bu script dosyasını çalıştır. Sonra "resnet_18_buildX.mlx dosyasını çalıştır.
+% Ardından Deep Network Designer uygulamasını aç ve 'From Workspace' kısmından modeli aç.
+% Ardından import data kısmından custom data kısmını aç ve train, test datastorelarını gir.
+% 
+% To Do:    -conv1d girdileri kabul etmiyor, giriş verilerinde herhangi bir boyut yok.
+%            1 boyutlu hale çevirmek lazım. Verilerin birbiri arasında bir ilişki bulmam 
+%            lazım ve feature engineering yapmam lazım."
+
+train_data_path = "/home/acg/Desktop/ai-project/files/BFP720_Train.txt";
+test_data_path  = "/home/acg/Desktop/ai-project/files/BFP720_HO.txt";
+
+% Read data
+train_data = readtable(train_data_path);
+test_data  = readtable(test_data_path);
+
+% Separate features and labels
+num_features = size(train_data, 2) - 1; % (label sonda kabul ettim)
+train_features = train_data(:, 1:num_features);
+train_labels   = train_data(:, end);
+test_features  = test_data(:, 1:num_features);
+test_labels    = test_data(:, end);
+
+train_features_array = table2array(train_features);
+train_labels_array   = table2array(train_labels);
+test_features_array  = table2array(test_features);
+test_labels_array    = table2array(test_labels);
+
+train_features_datastore = arrayDatastore(train_features_array);
+train_labels_datastore   = arrayDatastore(train_labels_array);
+test_features_datastore  = arrayDatastore(test_features_array);
+test_labels_datastore    = arrayDatastore(test_labels_array);
+
+train_datastore = combine(train_features_datastore, train_labels_datastore);
+test_datastore  = combine(test_features_datastore, test_labels_datastore);
