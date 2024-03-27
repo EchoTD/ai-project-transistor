@@ -7,8 +7,11 @@
 %            1 boyutlu hale çevirmek lazım. Verilerin birbiri arasında bir ilişki bulmam 
 %            lazım ve feature engineering yapmam lazım."
 
-train_data_path = "/home/acg/Desktop/ai-project/files/BFP720_Train.txt";
-test_data_path  = "/home/acg/Desktop/ai-project/files/BFP720_HO.txt";
+%train_data_path = "/home/acg/Desktop/ai-project/files/BFP720_Train.txt"; % Laptop x250
+%test_data_path  = "/home/acg/Desktop/ai-project/files/BFP720_HO.txt";
+
+train_data_path = "/home/acg/Repos/ai-project-transistor/files/BFP720_Train.txt"; % Desktop
+test_data_path  = "/home/acg/Repos/ai-project-transistor/files/BFP720_HO.txt";
 
 % Read data
 train_data = readtable(train_data_path);
